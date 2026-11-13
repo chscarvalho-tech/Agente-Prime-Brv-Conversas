@@ -1,0 +1,16 @@
+{
+  "name": "agente-prime-brv-conversas",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Agente de atendimento de WhatsApp da Prime Brv: recebe leads pelo WA-AKG, responde com a base de conhecimento, cria e qualifica o lead no CRM da empresa. Usa o Claude Code da própria empresa como cérebro.",
+  "type": "module",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "validar": "node cli.js validar",
+    "testes": "node testes/rodar.mjs",
+    "registrar-webhook": "node cli.js registrar-webhook"
+  }
+}

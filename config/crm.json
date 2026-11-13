@@ -1,0 +1,41 @@
+{
+  "_leia": "Como o agente fala com o CRM. Preenchido na instalação (instalacao/conectar-crm.md). Modos: 'http' (API REST do CRM), 'supabase' (CRM com banco Supabase), 'modulo' (crm/adaptador.js escrito na instalação) ou 'nenhum' (só testes). ${VAR} vem do .env.",
+
+  "modo": "nenhum",
+  "formato_telefone": "digitos",
+
+  "http": {
+    "base_url": "${CRM_URL}",
+    "cabecalhos": { "Authorization": "Bearer ${CRM_TOKEN}" },
+    "buscar_por_telefone": {
+      "metodo": "GET",
+      "caminho": "/api/leads?telefone={telefone}",
+      "id_no_resultado": "0.id"
+    },
+    "criar": {
+      "metodo": "POST",
+      "caminho": "/api/leads",
+      "corpo": { "nome": "{nome}", "telefone": "{telefone}", "origem": "WhatsApp", "etapa": "{etapa_crm}", "$campos": true },
+      "id_no_resultado": "id"
+    },
+    "atualizar": {
+      "metodo": "PATCH",
+      "caminho": "/api/leads/{crm_id}",
+      "corpo": { "etapa": "{etapa_crm}", "resumo": "{resumo}", "$campos": true }
+    },
+    "registrar_nota": {
+      "metodo": "POST",
+      "caminho": "/api/leads/{crm_id}/notas",
+      "corpo": { "texto": "{nota}", "autor": "Agente WhatsApp" }
+    }
+  },
+
+  "supabase": {
+    "url": "${CRM_URL}",
+    "chave": "${CRM_TOKEN}",
+    "tabela": "leads",
+    "colunas": { "id": "id", "telefone": "telefone", "nome": "nome", "etapa": "etapa", "resumo": "observacoes", "origem": "origem" },
+    "valor_origem": "WhatsApp",
+    "notas": { "tabela": "", "coluna_lead": "lead_id", "coluna_texto": "texto" }
+  }
+}

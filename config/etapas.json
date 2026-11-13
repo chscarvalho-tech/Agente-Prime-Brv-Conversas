@@ -1,0 +1,72 @@
+{
+  "_leia": "MODELO. Na instalação, o Claude Code substitui tudo isto pelas etapas, campos e regras que a dona do negócio informar (instalacao/entrevista.md). 'valor_crm' é exatamente como a etapa se chama no CRM dela.",
+
+  "etapa_inicial": "novo",
+  "etapas": [
+    {
+      "id": "novo",
+      "nome": "Novo contato",
+      "valor_crm": "Novo",
+      "objetivo": "Cumprimentar, se apresentar e descobrir o nome e o que a pessoa procura.",
+      "avancar_quando": "A pessoa disse o nome e qual produto ou necessidade tem."
+    },
+    {
+      "id": "em_qualificacao",
+      "nome": "Em qualificação",
+      "valor_crm": "Em qualificação",
+      "objetivo": "Coletar os dados de qualificação, um por vez, e tirar dúvidas com a base de conhecimento.",
+      "avancar_quando": "Todos os campos obrigatórios estão preenchidos e a pessoa está dentro do perfil."
+    },
+    {
+      "id": "qualificado",
+      "nome": "Qualificado",
+      "valor_crm": "Qualificado",
+      "objetivo": "Confirmar o interesse no próximo passo (conversa com especialista, simulação, envio de documentos).",
+      "avancar_quando": "A pessoa aceitou o próximo passo."
+    },
+    {
+      "id": "encaminhado",
+      "nome": "Encaminhado para a equipe",
+      "valor_crm": "Encaminhado",
+      "objetivo": "A equipe assume. O agente para de responder.",
+      "final": true
+    },
+    {
+      "id": "desqualificado",
+      "nome": "Fora do perfil",
+      "valor_crm": "Desqualificado",
+      "objetivo": "Encerrar com educação e, se fizer sentido, indicar outro caminho.",
+      "final": true
+    }
+  ],
+
+  "campos": [
+    { "id": "nome", "rotulo": "Nome", "obrigatorio": true, "campo_crm": "nome" },
+    { "id": "interesse", "rotulo": "Produto ou necessidade", "obrigatorio": true, "campo_crm": "interesse", "opcoes": ["exemplo A", "exemplo B"] },
+    { "id": "valor_pretendido", "rotulo": "Valor pretendido", "obrigatorio": false, "campo_crm": "valor" },
+    { "id": "cidade", "rotulo": "Cidade/UF", "obrigatorio": false, "campo_crm": "cidade" },
+    { "id": "melhor_horario", "rotulo": "Melhor horário para contato", "obrigatorio": false, "campo_crm": "melhor_horario" }
+  ],
+
+  "regras_transferencia": [
+    "A pessoa pede para falar com uma pessoa, gerente ou especialista.",
+    "A pessoa chegou a 'qualificado' e aceitou o próximo passo.",
+    "Pergunta sobre condição específica de contrato, taxa individual, aprovação ou situação que só a equipe pode avaliar.",
+    "Reclamação, cobrança, contestação ou cliente atual com problema em contrato.",
+    "A pessoa está irritada ou a conversa travou duas vezes."
+  ],
+
+  "regras_desqualificacao": [
+    "Exemplo: procura um produto que a empresa não oferece.",
+    "Exemplo: não atende a um requisito obrigatório informado na base de conhecimento."
+  ],
+
+  "destinos": [
+    {
+      "id": "comercial",
+      "nome": "Equipe comercial",
+      "whatsapp": "",
+      "quando": "Padrão para leads qualificados e pedidos de atendimento humano."
+    }
+  ]
+}
